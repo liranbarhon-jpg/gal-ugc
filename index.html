@@ -82,7 +82,15 @@ section.block{padding-block:72px}
 .tap i{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:grid;place-items:center;transition:opacity .2s}
 .tap i::before{content:"";margin-inline-end:-3px;border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent rgba(255,255,255,.95)}
 .tap:focus-visible i{outline:3px solid #fff;outline-offset:2px}
-.frame.playing .tap i{opacity:0}.chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
+.frame.playing .tap i{opacity:0}
+.ctl{position:absolute;bottom:10px;left:10px;display:flex;gap:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+.frame.playing .ctl{opacity:1;pointer-events:auto}
+.ctl button{width:34px;height:34px;border-radius:50%;border:0;padding:0;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);color:#fff;cursor:pointer;display:grid;place-items:center}
+.ctl button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.ctl svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ctl .snd .x,.frame.muted .ctl .snd .w{display:none}
+.frame.muted .ctl .snd .x{display:inline}
+.chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
 
 /* reviews */
 .reviews{background:var(--blush);position:relative}
@@ -223,21 +231,33 @@ var REVIEWS=[
   {t:"וואו הוא מהמם!!!!!!",s:"צירים",img:"reviews/4.jpg",logo:"images/brands/tzirim.svg"},
   {t:"מעלף!",s:"העץ של יאשה",img:"reviews/5.jpg"}
 ];
-/* Phones (touch, no hover): no native controls, their dark overlay looked bad; tap plays, tap again pauses.
-   Computers keep the browser's normal player. Only one video plays at a time. */
-var TOUCH=window.matchMedia("(hover: none)").matches;
+/* Own player instead of the browser's (its dark overlay looked bad on phones): tap plays, tap again pauses.
+   While playing, two small buttons: sound and full screen. Full screen uses the browser's own player.
+   Only one video plays at a time. */
+var CTL='<div class="ctl">'
+  +'<button class="snd" type="button" aria-label="קול"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg></button>'
+  +'<button class="fs" type="button" aria-label="מסך מלא"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div>';
 document.getElementById("vids").innerHTML=VIDEOS.map(function(v){
-  var media=TOUCH
-    ?'<video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="metadata" playsinline></video><button class="tap" type="button" aria-label="'+v.l+'"><i></i></button>'
-    :'<video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline controls></video>';
-  return '<div class="card"><div class="frame">'+media+'</div><span class="chip">'+v.l+'</span></div>';
+  return '<div class="card"><div class="frame"><video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="metadata" playsinline></video>'
+    +'<button class="tap" type="button" aria-label="'+v.l+'"><i></i></button>'+CTL+'</div><span class="chip">'+v.l+'</span></div>';
 }).join("");
 var vids=document.getElementById("vids");
 vids.addEventListener("click",function(e){
-  var b=e.target.closest(".tap");if(!b)return;
-  var v=b.previousElementSibling;
-  if(v.paused)v.play();else v.pause();
+  var f=e.target.closest(".frame");if(!f)return;
+  var v=f.querySelector("video");
+  if(e.target.closest(".snd")){v.muted=!v.muted;f.classList.toggle("muted",v.muted);return}
+  if(e.target.closest(".fs")){
+    v.controls=true;
+    if(v.requestFullscreen)v.requestFullscreen();else if(v.webkitRequestFullscreen)v.webkitRequestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen();
+    return;
+  }
+  if(e.target.closest(".tap")){if(v.paused)v.play();else v.pause()}
 });
+/* Back from full screen: hide the browser's controls again. */
+function exitFs(){if(!document.fullscreenElement&&!document.webkitFullscreenElement)vids.querySelectorAll("video").forEach(function(o){o.controls=false})}
+document.addEventListener("fullscreenchange",exitFs);
+document.addEventListener("webkitfullscreenchange",exitFs);
+vids.addEventListener("webkitendfullscreen",function(e){e.target.controls=false},true);
 ["play","pause","ended"].forEach(function(t){
   vids.addEventListener(t,function(e){
     e.target.parentNode.classList.toggle("playing",t==="play");
