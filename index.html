@@ -77,7 +77,12 @@ section.block{padding-block:72px}
 .card:nth-child(4n+1){--r:-1.6deg}.card:nth-child(4n+2){--r:1.2deg}.card:nth-child(4n+3){--r:-1deg}.card:nth-child(4n+4){--r:1.6deg}
 .card::before{content:"";position:absolute;top:-11px;left:50%;width:70px;height:22px;margin-left:-35px;background:var(--tape);opacity:.9;transform:rotate(-3deg);z-index:2}
 .frame{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#f0b6c9,#ffc9b8)}
-.frame video{width:100%;height:100%;object-fit:cover}.chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
+.frame video{width:100%;height:100%;object-fit:cover}
+.tap{position:absolute;inset:0;width:100%;border:0;padding:0;background:none;cursor:pointer;display:grid;place-items:center}
+.tap i{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:grid;place-items:center;transition:opacity .2s}
+.tap i::before{content:"";margin-inline-end:-3px;border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent rgba(255,255,255,.95)}
+.tap:focus-visible i{outline:3px solid #fff;outline-offset:2px}
+.frame.playing .tap i{opacity:0}.chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
 
 /* reviews */
 .reviews{background:var(--blush);position:relative}
@@ -218,21 +223,26 @@ var REVIEWS=[
   {t:"וואו הוא מהמם!!!!!!",s:"צירים",img:"reviews/4.jpg",logo:"images/brands/tzirim.svg"},
   {t:"מעלף!",s:"העץ של יאשה",img:"reviews/5.jpg"}
 ];
+/* Phones (touch, no hover): no native controls, their dark overlay looked bad; tap plays, tap again pauses.
+   Computers keep the browser's normal player. Only one video plays at a time. */
+var TOUCH=window.matchMedia("(hover: none)").matches;
 document.getElementById("vids").innerHTML=VIDEOS.map(function(v){
-  return '<div class="card"><div class="frame"><video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline controls></video></div><span class="chip">'+v.l+'</span></div>';
+  var media=TOUCH
+    ?'<video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="metadata" playsinline></video><button class="tap" type="button" aria-label="'+v.l+'"><i></i></button>'
+    :'<video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline controls></video>';
+  return '<div class="card"><div class="frame">'+media+'</div><span class="chip">'+v.l+'</span></div>';
 }).join("");
-/* While a video plays, hide the browser's control bar (and its dark overlay); tap pauses and brings it back.
-   Only one video plays at a time. */
 var vids=document.getElementById("vids");
-vids.addEventListener("play",function(e){
-  e.target.controls=false;
-  vids.querySelectorAll("video").forEach(function(o){if(o!==e.target)o.pause()});
-},true);
-vids.addEventListener("pause",function(e){e.target.controls=true},true);
-vids.addEventListener("ended",function(e){e.target.controls=true},true);
 vids.addEventListener("click",function(e){
-  var v=e.target.closest("video");
-  if(v&&!v.controls&&!v.paused){e.preventDefault();v.pause()}
+  var b=e.target.closest(".tap");if(!b)return;
+  var v=b.previousElementSibling;
+  if(v.paused)v.play();else v.pause();
+});
+["play","pause","ended"].forEach(function(t){
+  vids.addEventListener(t,function(e){
+    e.target.parentNode.classList.toggle("playing",t==="play");
+    if(t==="play")vids.querySelectorAll("video").forEach(function(o){if(o!==e.target)o.pause()});
+  },true);
 });
 var track=document.getElementById("track"),dots=document.getElementById("dots");
 track.innerHTML=REVIEWS.map(function(r){
