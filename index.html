@@ -1,0 +1,232 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>אתר תיק עבודות של גל</title>
+<meta name="description" content="גל קרשטיין ברהון, יוצרת תוכן UGC. סרטונים אותנטיים שמעלים מעורבות ועובדים גם כמודעות ממומנות.">
+</head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Fredoka:wght@400;500&family=Secular+One&display=swap">
+<style>
+/* Concept: a pink scrapbook. Taped cards, a big arch portrait, videos in framed windows, reviews as a swipeable stack of notes. */
+:root{
+  --cream:#fdf6f1; --blush:#f7dce5; --rose:#f4c9d6; --berry:#c2185b; --berry-dark:#8c1346;
+  --ink:#503546; --coral:#ff7a59; --tape:#ffb199; --wa:#25d366;
+  --display:'Secular One','Rubik',sans-serif; --body:'Rubik',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;padding-inline:0;background:var(--cream);color:var(--ink);font-family:var(--body);line-height:1.6;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:999px;font-weight:700;text-decoration:none;font-size:1.05rem;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,.nav button:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.btn.main{background:var(--berry);color:#fff;box-shadow:0 6px 0 var(--berry-dark)}
+.btn.wa{background:var(--wa);color:#fff;box-shadow:0 6px 0 #168a43}
+.btn.ig{background:#fff;color:var(--berry);border:2px solid var(--berry)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:radial-gradient(900px 520px at 88% 0%,var(--blush),transparent 70%),radial-gradient(700px 420px at 0% 100%,#ffe3d9,transparent 70%)}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center;padding-block:80px 72px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--berry);font-weight:500;letter-spacing:.04em;font-size:.85rem;padding:7px 16px;border-radius:999px;border:1.5px solid var(--rose);box-shadow:0 2px 10px rgba(194,24,91,.08);margin-bottom:22px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--berry)}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3.7rem);line-height:1.05;letter-spacing:-.01em;color:var(--berry);white-space:nowrap;text-align:right}
+.hero h1 em{font-style:normal;color:var(--berry-dark)}
+.hero h1::after{content:"";display:block;width:84px;height:6px;border-radius:6px;margin:18px 0 0 auto;background:linear-gradient(90deg,var(--tape),var(--berry))}
+.lead{margin:26px 0 22px;max-width:52ch}
+.lead .hi{display:block;font-family:var(--display);font-size:clamp(1.5rem,2.6vw,1.9rem);line-height:1.2;color:var(--berry-dark)}
+.lead .who{display:block;font-weight:500;font-size:1.15rem;color:var(--berry);margin:4px 0 12px}
+.lead .what{display:block;font-family:'Fredoka','Rubik',sans-serif;font-size:1.22rem;line-height:1.7;color:#5e3a52;text-wrap:pretty}
+.hero .wrap>div{min-width:0}
+.value{position:relative;padding:4px 18px 4px 0;border-inline-start:4px solid var(--rose);font-weight:500;color:var(--berry-dark);max-width:54ch;margin-bottom:32px;opacity:.9}
+.hero .row{display:flex;gap:14px;flex-wrap:wrap}
+.brands{padding:44px 0 52px;background:#fff;border-top:1px solid var(--blush)}
+.brands h2{font-size:clamp(1.5rem,3vw,2rem);text-align:center;color:var(--ink)}
+.brands h2 small{display:block;font-family:var(--body);font-size:.95rem;font-weight:500;color:var(--berry);margin-top:4px}
+.logos{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:28px}
+.logo{width:142px;height:84px;display:grid;place-items:center;padding:14px 18px;background:var(--cream);border:1.5px solid var(--blush);border-radius:18px;transition:transform .2s,box-shadow .2s}
+.logo:hover{transform:translateY(-3px);box-shadow:0 10px 24px -12px rgba(140,19,70,.35)}
+.logo img{max-width:100%;max-height:52px;object-fit:contain}
+.logo.word{font-family:var(--display);font-size:1.25rem;line-height:1.1;color:var(--berry-dark);text-align:center}
+.portrait{position:relative;width:min(100%,390px);justify-self:center;margin-block:10px}
+.portrait::before{content:"";position:absolute;inset:20px -20px -20px 20px;background:linear-gradient(160deg,var(--rose),#ffd4c4);border-radius:200px 200px 36px 36px}
+.portrait::after{content:"";position:absolute;inset:-14px -14px 14px 14px;border:2px dashed var(--berry);opacity:.35;border-radius:210px 210px 40px 40px;pointer-events:none}
+.portrait img{position:relative;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:200px 200px 36px 36px;border:6px solid #fff;box-shadow:0 24px 50px -20px rgba(140,19,70,.45)}
+.spark{position:absolute;z-index:2;color:var(--berry);font-size:1.6rem;line-height:1}
+.spark.a{top:6%;inset-inline-end:-6%}.spark.b{bottom:14%;inset-inline-start:-9%;color:var(--coral);font-size:1.2rem}
+.how{background:var(--berry);color:#fff;padding:14px 0;overflow:hidden}
+.how .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:center;font-weight:500}
+.how span::before{content:"✦";margin-inline-end:10px;color:var(--tape)}
+
+/* works */
+section.block{padding-block:72px}
+.title{text-align:center;margin-bottom:40px}
+.title h2{font-size:clamp(2rem,4.5vw,3rem);color:var(--ink)}
+.title p{margin:8px 0 0;color:var(--berry)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 22px}
+.card{position:relative;background:#fff;border-radius:20px;padding:10px 10px 12px;box-shadow:6px 6px 0 var(--rose);transform:rotate(var(--r,0deg));transition:transform .2s}
+.card:hover{transform:rotate(0) translateY(-4px)}
+.card:nth-child(4n+1){--r:-1.6deg}.card:nth-child(4n+2){--r:1.2deg}.card:nth-child(4n+3){--r:-1deg}.card:nth-child(4n+4){--r:1.6deg}
+.card::before{content:"";position:absolute;top:-11px;left:50%;width:70px;height:22px;margin-left:-35px;background:var(--tape);opacity:.9;transform:rotate(-3deg);z-index:2}
+.frame{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#f0b6c9,#ffc9b8)}
+.frame video{width:100%;height:100%;object-fit:cover}
+.chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
+
+/* reviews */
+.reviews{background:var(--blush);position:relative}
+.reviews .stars{color:var(--coral);letter-spacing:.2em;font-size:1.4rem;text-align:center;margin-top:-24px;margin-bottom:28px}
+.track{display:flex;align-items:center;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:18px 6px 26px}
+.track::-webkit-scrollbar{display:none}
+.note{position:relative;flex:0 0 min(340px,82%);scroll-snap-align:center;background:#fff;border-radius:22px;padding:34px 26px 24px;box-shadow:6px 6px 0 var(--rose);min-height:230px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;transform:rotate(var(--r,0deg))}
+.note:nth-child(odd){--r:-1.4deg}.note:nth-child(even){--r:1.4deg}
+.note::before{content:"";position:absolute;top:-11px;left:50%;width:76px;height:22px;margin-left:-38px;background:var(--tape);transform:rotate(2deg)}
+.note::after{content:"״";position:absolute;top:10px;inset-inline-end:20px;font-family:var(--display);font-size:4.5rem;line-height:1;color:var(--rose)}
+.note b{font-family:var(--display);font-weight:400;font-size:1.55rem;line-height:1.35;color:var(--berry-dark)}
+.who-said{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:2px dashed var(--blush)}
+.who-said .av{flex:0 0 46px;height:46px;border-radius:50%;background:var(--cream);border:1.5px solid var(--rose);display:grid;place-items:center;overflow:hidden;padding:6px}
+.who-said .av img{max-width:100%;max-height:100%;object-fit:contain}
+.who-said .av b{font-size:1.2rem;color:var(--berry)}
+.who-said div{display:flex;flex-direction:column;line-height:1.25}
+.who-said strong{font-family:var(--display);font-weight:400;font-size:1.25rem;color:var(--berry-dark)}
+.who-said span{color:var(--coral);letter-spacing:.12em;font-size:.85rem}
+.note.has-shot{padding-top:26px;justify-content:flex-start}
+.note.has-shot::after{display:none}
+.note .shot{margin-block:auto;width:100%;border-radius:12px;border:1px solid var(--rose);max-height:420px;object-fit:contain;background:#fff}
+.nav{display:flex;gap:12px;justify-content:center;align-items:center;margin-top:6px}
+.nav button{width:52px;height:52px;border-radius:50%;border:0;background:var(--berry);color:#fff;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 0 var(--berry-dark)}
+.nav button:active{transform:translateY(2px);box-shadow:0 2px 0 var(--berry-dark)}
+.dots{display:flex;gap:8px;margin-inline:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--rose)}
+.dots i.on{background:var(--berry)}
+
+/* closing */
+.end{text-align:center;padding-block:80px}
+.end h2{font-size:clamp(2rem,5vw,3.4rem);color:var(--berry)}
+.end .row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+footer{text-align:center;padding:0 16px 40px;color:var(--ink);opacity:.7;font-size:.9rem}
+
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:48px;gap:36px}
+  .portrait{order:-1;width:min(70%,290px)}
+  .hero h1{font-size:min(2.6rem,calc((100vw - 40px) / 10.4))}
+  .hero h1,.lead,.value{text-align:center;margin-inline:auto}
+  .hero h1::after{margin-inline:auto}
+  .value{border-inline-start:0;padding:0}
+  .hero .wrap>div:first-child{text-align:center}
+  .hero .row{justify-content:center}
+  .logos{gap:10px}
+  .logo{width:calc(50% - 5px);height:76px}
+  section.block{padding-block:52px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.btn{transition:none}}
+</style>
+
+<div dir="rtl">
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">UGC • Social media • Content creation</span>
+      <h1 dir="ltr"><em>Gal</em> Kershtein Barhon</h1>
+      <p class="lead"><span class="hi">היי, אני גל.</span><span class="who">אמא לשתי בנות, יוצרת תוכן ו-UGC.</span><span class="what">מייצרת למותגים סרטונים בגובה העיניים – כאלה שמרגישים כמו המלצה אמיתית, ומציגים את המוצר בצורה הכי מושכת ואותנטית שיש.</span></p>
+      <div class="value">סרטוני UGC אותנטיים שמעלים מעורבות, מגדילים אחוזי המרה ועובדים מצוין גם כמודעות ממומנות ברשתות החברתיות.</div>
+      <div class="row">
+        <a class="btn main" href="https://wa.me/972544505799?text=%D7%94%D7%99%D7%99%20%D7%92%D7%9C%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%AA%D7%99%D7%A7%20%D7%94%D7%A2%D7%91%D7%95%D7%93%D7%95%D7%AA%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A9%D7%99%D7%AA%D7%95%D7%A3%20%D7%A4%D7%A2%D7%95%D7%9C%D7%94" target="_blank" rel="noopener">בואו נכיר</a>
+        <a class="btn ig" href="https://www.instagram.com/gal_kershtein_barhon" target="_blank" rel="noopener">האינסטגרם שלי</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <img src="images/gal.jpg" alt="גל קרשטיין ברהון">
+      <span class="spark a" aria-hidden="true">✦</span><span class="spark b" aria-hidden="true">✦</span>
+    </div>
+  </div>
+</header>
+
+<section class="brands" aria-labelledby="brands-title">
+  <div class="wrap">
+    <h2 id="brands-title">שיתופי פעולה<small>מותגים שכבר יצרתי עבורם תוכן</small></h2>
+    <div class="logos">
+      <div class="logo"><img src="images/brands/britax.png" alt="Britax"></div>
+      <div class="logo"><img src="images/brands/mommycare.png" alt="MommyCare"></div>
+      <div class="logo word">Wondergift</div>
+      <div class="logo"><img src="images/brands/littlegali.svg" alt="little gali"></div>
+      <div class="logo"><img src="images/brands/airyonit.svg" alt="הריונית"></div>
+      <div class="logo"><img src="images/brands/tzirim.svg" alt="צירים"></div>
+      <div class="logo word">העץ של יאשה</div>
+    </div>
+  </div>
+</section>
+
+<div class="how"><div class="wrap"><span>רעיון ותסריט מותאמים למותג</span><span>צילום אותנטי</span><span>עריכה מוכנה לפרסום</span><span>עמידה בזמנים</span></div></div>
+
+<section class="block" id="works">
+  <div class="wrap">
+    <div class="title"><h2>העבודות שלי</h2><p>לחצו על סרטון כדי לצפות</p></div>
+    <div class="grid" id="vids"></div>
+  </div>
+</section>
+
+<section class="block reviews" id="reviews">
+  <div class="wrap">
+    <div class="title"><h2>לקוחות ממליצים</h2></div>
+    <div class="stars" aria-hidden="true">★★★★★</div>
+    <div class="track" id="track"></div>
+    <div class="nav">
+      <button id="prev" aria-label="הקודם">→</button>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+      <button id="next" aria-label="הבא">←</button>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <h2>מוכנים ליצור משהו ביחד?</h2>
+    <div class="row">
+      <a class="btn wa" href="https://wa.me/972544505799?text=%D7%94%D7%99%D7%99%20%D7%92%D7%9C%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%AA%D7%99%D7%A7%20%D7%94%D7%A2%D7%91%D7%95%D7%93%D7%95%D7%AA%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A9%D7%99%D7%AA%D7%95%D7%A3%20%D7%A4%D7%A2%D7%95%D7%9C%D7%94" target="_blank" rel="noopener">שיחה מהירה בוואטסאפ</a>
+      <a class="btn ig" href="https://www.instagram.com/gal_kershtein_barhon" target="_blank" rel="noopener">צפו בפרופיל האינסטגרם שלי</a>
+    </div>
+  </div>
+</section>
+<footer>© Gal Kershtein Barhon</footer>
+
+<script>
+/* Edit these lists to change the videos and reviews. Video files live in the videos folder. */
+var VIDEOS=[
+  {f:"videos/1.mp4",l:"יום צילום ב-Britax"},
+  {f:"videos/2.mp4",l:"MommyCare: טיפים נגד סימני מתיחה"},
+  {f:"videos/3.mp4",l:"Little gali: ספרון מתמונות"},
+  {f:"videos/4.mp4",l:"מדידות: לוקים להריון"},
+  {f:"videos/5.mp4",l:"סרטון המלצה"},
+  {f:"videos/6.mp4",l:"סרטון Unboxing"},
+  {f:"videos/7.mp4",l:"סרטון המלצה"},
+  {f:"videos/8.mp4",l:"סרטון המלצה"},
+  {f:"videos/9.mp4",l:"קנבס בהתאמה אישית"}
+];
+var REVIEWS=[
+  {t:"תקשיבי זה מעולההה",s:"little gali",img:"reviews/1.jpg",logo:"images/brands/littlegali.svg"},
+  {t:"ואייי יצא מושלם ממש אהבתי !",s:"הריונית",img:"reviews/2.jpg",logo:"images/brands/airyonit.svg"},
+  {t:"זה מהממם",s:"הריונית",img:"reviews/3.jpg",logo:"images/brands/airyonit.svg"},
+  {t:"וואו הוא מהמם!!!!!!",s:"צירים",img:"reviews/4.jpg",logo:"images/brands/tzirim.svg"},
+  {t:"מעלף!",s:"העץ של יאשה",img:"reviews/5.jpg"}
+];
+document.getElementById("vids").innerHTML=VIDEOS.map(function(v){
+  return '<div class="card"><div class="frame"><video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline controls></video></div><span class="chip">'+v.l+'</span></div>';
+}).join("");
+var track=document.getElementById("track"),dots=document.getElementById("dots");
+track.innerHTML=REVIEWS.map(function(r){
+  var body=r.img?'<img class="shot" src="'+r.img+'" alt="'+r.t.replace(/"/g,"&quot;")+'" loading="lazy">':'<b>'+r.t+'</b>';
+  var av=r.logo?'<img src="'+r.logo+'" alt="">':'<b>'+r.s.charAt(0)+'</b>';
+  return '<div class="note'+(r.img?' has-shot':'')+'">'+body+'<div class="who-said"><span class="av">'+av+'</span><div><strong>'+r.s+'</strong><span aria-label="5 כוכבים">★★★★★</span></div></div></div>'}).join("");
+dots.innerHTML=REVIEWS.map(function(_,i){return '<i'+(i===0?' class="on"':'')+'></i>'}).join("");
+function step(){var n=track.querySelector(".note");return n.getBoundingClientRect().width+22}
+document.getElementById("next").onclick=function(){track.scrollBy({left:-step(),behavior:"smooth"})};
+document.getElementById("prev").onclick=function(){track.scrollBy({left:step(),behavior:"smooth"})};
+track.addEventListener("scroll",function(){
+  var notes=track.querySelectorAll(".note"),c=track.getBoundingClientRect(),mid=c.left+c.width/2,best=0,bd=1e9;
+  notes.forEach(function(n,i){var r=n.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});
+  dots.querySelectorAll("i").forEach(function(d,i){d.className=i===best?"on":""});
+});
+</script>
+</div>
+
+</body></html>
