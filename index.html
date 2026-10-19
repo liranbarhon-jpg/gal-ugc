@@ -77,13 +77,7 @@ section.block{padding-block:72px}
 .card:nth-child(4n+1){--r:-1.6deg}.card:nth-child(4n+2){--r:1.2deg}.card:nth-child(4n+3){--r:-1deg}.card:nth-child(4n+4){--r:1.6deg}
 .card::before{content:"";position:absolute;top:-11px;left:50%;width:70px;height:22px;margin-left:-35px;background:var(--tape);opacity:.9;transform:rotate(-3deg);z-index:2}
 .frame{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#f0b6c9,#ffc9b8)}
-.frame video{width:100%;height:100%;object-fit:cover}
-.play{position:absolute;inset:0;margin:auto;width:66px;height:66px;border-radius:50%;border:0;padding:0;background:rgba(194,24,91,.92);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 22px rgba(80,20,50,.35);transition:transform .15s}
-.play svg{width:26px;height:26px;margin-inline-start:4px;fill:currentColor}
-.frame:hover .play{transform:scale(1.08)}
-.play:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.frame.on .play{display:none}
-.chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
+.frame video{width:100%;height:100%;object-fit:cover}.chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
 
 /* reviews */
 .reviews{background:var(--blush);position:relative}
@@ -225,17 +219,21 @@ var REVIEWS=[
   {t:"מעלף!",s:"העץ של יאשה",img:"reviews/5.jpg"}
 ];
 document.getElementById("vids").innerHTML=VIDEOS.map(function(v){
-  return '<div class="card"><div class="frame"><video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline></video><button class="play" type="button" aria-label="'+v.l+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button></div><span class="chip">'+v.l+'</span></div>';
+  return '<div class="card"><div class="frame"><video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline controls></video></div><span class="chip">'+v.l+'</span></div>';
 }).join("");
-/* Clean poster until tapped; then play right away with native controls. Only one video plays at a time. */
+/* While a video plays, hide the browser's control bar (and its dark overlay); tap pauses and brings it back.
+   Only one video plays at a time. */
 var vids=document.getElementById("vids");
-vids.addEventListener("click",function(e){
-  var f=e.target.closest(".frame");if(!f||f.classList.contains("on"))return;
-  var v=f.querySelector("video");f.classList.add("on");v.controls=true;v.play();
-});
 vids.addEventListener("play",function(e){
+  e.target.controls=false;
   vids.querySelectorAll("video").forEach(function(o){if(o!==e.target)o.pause()});
 },true);
+vids.addEventListener("pause",function(e){e.target.controls=true},true);
+vids.addEventListener("ended",function(e){e.target.controls=true},true);
+vids.addEventListener("click",function(e){
+  var v=e.target.closest("video");
+  if(v&&!v.controls&&!v.paused){e.preventDefault();v.pause()}
+});
 var track=document.getElementById("track"),dots=document.getElementById("dots");
 track.innerHTML=REVIEWS.map(function(r){
   var body=r.img?'<img class="shot" src="'+r.img+'" alt="'+r.t.replace(/"/g,"&quot;")+'" loading="lazy">':'<b>'+r.t+'</b>';
