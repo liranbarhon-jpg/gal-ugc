@@ -78,6 +78,11 @@ section.block{padding-block:72px}
 .card::before{content:"";position:absolute;top:-11px;left:50%;width:70px;height:22px;margin-left:-35px;background:var(--tape);opacity:.9;transform:rotate(-3deg);z-index:2}
 .frame{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#f0b6c9,#ffc9b8)}
 .frame video{width:100%;height:100%;object-fit:cover}
+.play{position:absolute;inset:0;margin:auto;width:66px;height:66px;border-radius:50%;border:0;padding:0;background:rgba(194,24,91,.92);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 22px rgba(80,20,50,.35);transition:transform .15s}
+.play svg{width:26px;height:26px;margin-inline-start:4px;fill:currentColor}
+.frame:hover .play{transform:scale(1.08)}
+.play:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.frame.on .play{display:none}
 .chip{display:block;text-align:center;margin-top:10px;font-weight:700;color:var(--berry);font-size:.95rem}
 
 /* reviews */
@@ -137,7 +142,7 @@ footer{text-align:center;padding:0 16px 40px;color:var(--ink);opacity:.7;font-si
     <div>
       <span class="eyebrow">UGC • Social media • Content creation</span>
       <h1 dir="ltr"><em>Gal</em> Kershtein Barhon</h1>
-      <p class="lead"><span class="hi">היי, אני גל.</span><span class="who">אמא לשתי בנות, יוצרת תוכן ו-UGC.</span><span class="what">מייצרת למותגים סרטונים בגובה העיניים – כאלה שמרגישים כמו המלצה אמיתית, ומציגים את המוצר בצורה הכי מושכת ואותנטית שיש.</span></p>
+      <p class="lead"><span class="hi">היי, אני גל.</span><span class="who">אמא לשתי בנות, יוצרת תוכן ו-UGC.</span><span class="what">מייצרת למותגים סרטונים בגובה העיניים כאלה&nbsp;שמרגישים כמו המלצה אמיתית, ומציגים את המוצר בצורה הכי מושכת ואותנטית שיש.</span></p>
       <div class="value">סרטוני UGC אותנטיים שמעלים מעורבות, מגדילים אחוזי המרה ועובדים מצוין גם כמודעות ממומנות ברשתות החברתיות.</div>
       <div class="row">
         <a class="btn main" href="https://wa.me/972545595610?text=%D7%94%D7%99%D7%99%20%D7%94%D7%92%D7%A2%D7%AA%20%D7%93%D7%A8%D7%9A%20%D7%AA%D7%99%D7%A7%20%D7%94%D7%A2%D7%91%D7%95%D7%93%D7%95%D7%AA%20%D7%A9%D7%9C%D7%9A%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A0%D7%95%D7%A1%D7%A4%D7%99%D7%9D." target="_blank" rel="noopener">בואו נכיר</a>
@@ -220,8 +225,17 @@ var REVIEWS=[
   {t:"מעלף!",s:"העץ של יאשה",img:"reviews/5.jpg"}
 ];
 document.getElementById("vids").innerHTML=VIDEOS.map(function(v){
-  return '<div class="card"><div class="frame"><video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline controls></video></div><span class="chip">'+v.l+'</span></div>';
+  return '<div class="card"><div class="frame"><video src="'+v.f+'" poster="'+v.f.replace(".mp4",".jpg")+'" preload="none" playsinline></video><button class="play" type="button" aria-label="'+v.l+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button></div><span class="chip">'+v.l+'</span></div>';
 }).join("");
+/* Clean poster until tapped; then play right away with native controls. Only one video plays at a time. */
+var vids=document.getElementById("vids");
+vids.addEventListener("click",function(e){
+  var f=e.target.closest(".frame");if(!f||f.classList.contains("on"))return;
+  var v=f.querySelector("video");f.classList.add("on");v.controls=true;v.play();
+});
+vids.addEventListener("play",function(e){
+  vids.querySelectorAll("video").forEach(function(o){if(o!==e.target)o.pause()});
+},true);
 var track=document.getElementById("track"),dots=document.getElementById("dots");
 track.innerHTML=REVIEWS.map(function(r){
   var body=r.img?'<img class="shot" src="'+r.img+'" alt="'+r.t.replace(/"/g,"&quot;")+'" loading="lazy">':'<b>'+r.t+'</b>';
