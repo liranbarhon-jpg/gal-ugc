@@ -1,0 +1,9 @@
+Fonts in this folder come from Google Fonts and are licensed under the
+SIL Open Font License, Version 1.1 (https://openfontlicense.org/).
+
+- Rubik         Copyright 2015 The Rubik Project Authors (https://github.com/googlefonts/rubik)
+- Fredoka       Copyright 2016 The Fredoka Project Authors (https://github.com/hafontia-zz/Fredoka)
+- Secular One   Copyright 2015 Fontef (https://github.com/fontef/secular)
+
+They are served from this site instead of fonts.googleapis.com so that
+visitors' browsers do not contact Google when the page loads.

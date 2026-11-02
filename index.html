@@ -11,7 +11,7 @@
 <meta property="og:image:height" content="720">
 <meta name="twitter:card" content="summary_large_image">
 </head><body>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Fredoka:wght@400;500&family=Secular+One&display=swap">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* Concept: a pink scrapbook. Taped cards, a big arch portrait, videos in framed windows, reviews as a swipeable stack of notes. */
 :root{
@@ -123,7 +123,12 @@ section.block{padding-block:72px}
 .end{text-align:center;padding-block:80px}
 .end h2{font-size:clamp(2rem,5vw,3.4rem);color:var(--berry)}
 .end .row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:30px}
-footer{text-align:center;padding:0 16px 40px;color:var(--ink);opacity:.7;font-size:.9rem}
+footer{text-align:center;padding:0 16px 40px;color:var(--ink);font-size:.9rem}
+footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 20px;margin-top:8px}
+footer a{color:var(--berry-dark);text-underline-offset:3px;padding:6px 2px}
+footer a:focus-visible,.skip:focus-visible{outline:3px solid var(--berry);outline-offset:2px}
+.skip{position:absolute;top:8px;inset-inline-start:8px;z-index:10;background:#fff;color:var(--berry-dark);font-weight:700;padding:10px 18px;border-radius:999px;transform:translateY(-200%)}
+.skip:focus{transform:none}
 
 @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:760px){
@@ -143,6 +148,7 @@ footer{text-align:center;padding:0 16px 40px;color:var(--ink);opacity:.7;font-si
 </style>
 
 <div dir="rtl">
+<a class="skip" href="#works">דלגו לעבודות</a>
 
 <header class="hero">
   <div class="wrap">
@@ -163,6 +169,7 @@ footer{text-align:center;padding:0 16px 40px;color:var(--ink);opacity:.7;font-si
   </div>
 </header>
 
+<main>
 <section class="brands" aria-labelledby="brands-title">
   <div class="wrap">
     <h2 id="brands-title">שיתופי פעולה<small>מותגים שכבר יצרתי עבורם תוכן</small></h2>
@@ -209,7 +216,8 @@ footer{text-align:center;padding:0 16px 40px;color:var(--ink);opacity:.7;font-si
     </div>
   </div>
 </section>
-<footer>© Gal Kershtein Barhon</footer>
+</main>
+<footer>© Gal Kershtein Barhon<nav aria-label="מידע על האתר"><a href="accessibility.html">הצהרת נגישות</a><a href="privacy.html">מדיניות פרטיות ועוגיות</a></nav></footer>
 
 <script>
 /* Edit these lists to change the videos and reviews. Video files live in the videos folder. */
