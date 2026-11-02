@@ -12,6 +12,8 @@
 <meta name="twitter:card" content="summary_large_image">
 </head><body>
 <link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="a11y.css">
+<script src="a11y.js"></script>
 <style>
 /* Concept: a pink scrapbook. Taped cards, a big arch portrait, videos in framed windows, reviews as a swipeable stack of notes. */
 :root{
@@ -21,7 +23,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;padding-inline:0;background:var(--cream);color:var(--ink);font-family:var(--body);line-height:1.6;overflow-x:hidden}
+body{margin:0;padding-inline:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:calc(14px * var(--a11y-fs,1));line-height:1.6;overflow-x:hidden}
 img,video{max-width:100%;display:block}
 a{color:inherit}
 .wrap{width:min(1180px,100% - 32px);margin-inline:auto}
@@ -129,10 +131,6 @@ footer a{display:inline-flex;align-items:center;gap:8px;color:var(--berry-dark);
 footer a:hover{border-color:var(--berry)}
 footer a svg{width:18px;height:18px;flex:none}
 footer a:focus-visible,.skip:focus-visible,.a11y:focus-visible,.cookie button:focus-visible,.cookie a:focus-visible{outline:3px solid var(--berry);outline-offset:2px}
-/* floating accessibility button */
-.a11y{position:fixed;z-index:20;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:50px;height:50px;border-radius:50%;background:var(--berry);color:#fff;display:grid;place-items:center;box-shadow:0 4px 0 var(--berry-dark),0 8px 20px -6px rgba(0,0,0,.35);transition:bottom .25s}
-.a11y svg{width:30px;height:30px}
-body.has-cookie .a11y{bottom:calc(var(--cookie-h,150px) + 16px)}
 /* cookie banner */
 .cookie{position:fixed;z-index:30;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:560px;margin-inline:auto;background:#fff;color:var(--ink);border:2px solid var(--rose);border-radius:20px;padding:16px 18px;box-shadow:0 14px 40px -12px rgba(80,53,70,.45);font-size:.95rem;line-height:1.55}
 .cookie p{margin:0 0 12px}
@@ -232,7 +230,6 @@ body.has-cookie .a11y{bottom:calc(var(--cookie-h,150px) + 16px)}
 </section>
 </main>
 <footer>© Gal Kershtein Barhon<nav aria-label="מידע על האתר"><a href="accessibility.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="4" r="2"/><path d="M19 9.5c0 .6-.4 1-1 1.1l-4 .5v3.2l2.3 5.3a1 1 0 1 1-1.8.8L12.3 15h-.6l-2.2 5.4a1 1 0 1 1-1.8-.8l2.3-5.3v-3.2l-4-.5a1 1 0 0 1 .2-2l3.9.5h3.8l3.9-.5c.6-.1 1.2.4 1.2 1z"/></svg>הצהרת נגישות</a><a href="privacy.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9 4 4 0 0 1-5-5 4 4 0 0 1-4-4z"/><circle cx="8.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="12" cy="16" r=".6" fill="currentColor"/><circle cx="15.5" cy="13.5" r=".6" fill="currentColor"/></svg>מדיניות פרטיות ועוגיות</a></nav></footer>
-<a class="a11y" href="accessibility.html" aria-label="הצהרת נגישות" title="הצהרת נגישות"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="4" r="2"/><path d="M19 9.5c0 .6-.4 1-1 1.1l-4 .5v3.2l2.3 5.3a1 1 0 1 1-1.8.8L12.3 15h-.6l-2.2 5.4a1 1 0 1 1-1.8-.8l2.3-5.3v-3.2l-4-.5a1 1 0 0 1 .2-2l3.9.5h3.8l3.9-.5c.6-.1 1.2.4 1.2 1z"/></svg></a>
 <div class="cookie" id="cookie" role="region" aria-label="הודעת עוגיות" hidden>
   <p>האתר לא משתמש בעוגיות מעקב או פרסום, רק במה שנדרש כדי שיעבוד. פרטים ב<a href="privacy.html">מדיניות הפרטיות והעוגיות</a>.</p>
   <div class="acts"><button class="ok" type="button" data-c="granted">מאשר/ת</button><button class="no" type="button" data-c="denied">דחייה</button></div>
