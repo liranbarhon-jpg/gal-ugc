@@ -127,8 +127,9 @@ section.block{padding-block:72px}
 .end .row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:30px}
 footer{text-align:center;padding:0 16px 96px;color:var(--ink);font-size:.9rem}
 footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:14px}
-footer a{display:inline-flex;align-items:center;gap:8px;color:var(--berry-dark);background:#fff;border:2px solid var(--rose);border-radius:999px;padding:9px 18px;font-weight:500;text-decoration:none}
-footer a:hover{border-color:var(--berry)}
+footer a,footer button{font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--berry-dark);background:#fff;border:2px solid var(--rose);border-radius:999px;padding:9px 18px;font-weight:500;text-decoration:none}
+footer a:hover,footer button:hover{border-color:var(--berry)}
+footer button:focus-visible{outline:3px solid var(--berry);outline-offset:2px}
 footer a svg{width:18px;height:18px;flex:none}
 footer a:focus-visible,.skip:focus-visible,.a11y:focus-visible,.cookie button:focus-visible,.cookie a:focus-visible{outline:3px solid var(--berry);outline-offset:2px}
 /* cookie banner */
@@ -229,7 +230,7 @@ footer a:focus-visible,.skip:focus-visible,.a11y:focus-visible,.cookie button:fo
   </div>
 </section>
 </main>
-<footer>© Gal Kershtein Barhon<nav aria-label="מידע על האתר"><a href="accessibility.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="4" r="2"/><path d="M19 9.5c0 .6-.4 1-1 1.1l-4 .5v3.2l2.3 5.3a1 1 0 1 1-1.8.8L12.3 15h-.6l-2.2 5.4a1 1 0 1 1-1.8-.8l2.3-5.3v-3.2l-4-.5a1 1 0 0 1 .2-2l3.9.5h3.8l3.9-.5c.6-.1 1.2.4 1.2 1z"/></svg>הצהרת נגישות</a><a href="privacy.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9 4 4 0 0 1-5-5 4 4 0 0 1-4-4z"/><circle cx="8.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="12" cy="16" r=".6" fill="currentColor"/><circle cx="15.5" cy="13.5" r=".6" fill="currentColor"/></svg>מדיניות פרטיות ועוגיות</a></nav></footer>
+<footer>© Gal Kershtein Barhon<nav aria-label="מידע על האתר"><a href="accessibility.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="4" r="2"/><path d="M19 9.5c0 .6-.4 1-1 1.1l-4 .5v3.2l2.3 5.3a1 1 0 1 1-1.8.8L12.3 15h-.6l-2.2 5.4a1 1 0 1 1-1.8-.8l2.3-5.3v-3.2l-4-.5a1 1 0 0 1 .2-2l3.9.5h3.8l3.9-.5c.6-.1 1.2.4 1.2 1z"/></svg>הצהרת נגישות</a><a href="privacy.html"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9 4 4 0 0 1-5-5 4 4 0 0 1-4-4z"/><circle cx="8.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="12" cy="16" r=".6" fill="currentColor"/><circle cx="15.5" cy="13.5" r=".6" fill="currentColor"/></svg>מדיניות פרטיות ועוגיות</a><button type="button" id="cookie-open">הגדרות עוגיות</button></nav></footer>
 <div class="cookie" id="cookie" role="region" aria-label="הודעת עוגיות" hidden>
   <p>האתר לא משתמש בעוגיות מעקב או פרסום, רק במה שנדרש כדי שיעבוד. פרטים ב<a href="privacy.html">מדיניות הפרטיות והעוגיות</a>.</p>
   <div class="acts"><button class="ok" type="button" data-c="granted">מאשר/ת</button><button class="no" type="button" data-c="denied">דחייה</button></div>
@@ -300,15 +301,16 @@ function step(){var n=track.querySelector(".note");return n.getBoundingClientRec
 (function(){
   var K="gal-cookie-consent",box=document.getElementById("cookie"),saved=null;
   try{saved=localStorage.getItem(K)}catch(e){}
-  if(saved)return;
-  box.hidden=false;document.body.classList.add("has-cookie");
   function fit(){document.body.style.setProperty("--cookie-h",(box.offsetHeight+12)+"px")}
-  fit();addEventListener("resize",fit);
+  function show(){box.hidden=false;document.body.classList.add("has-cookie");fit();addEventListener("resize",fit)}
   box.addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
     try{localStorage.setItem(K,b.getAttribute("data-c"))}catch(e){}
     box.hidden=true;document.body.classList.remove("has-cookie");removeEventListener("resize",fit);
   });
+  /* "Cookie settings" button in the footer reopens the banner. */
+  document.getElementById("cookie-open").addEventListener("click",function(){show();box.querySelector(".ok").focus()});
+  if(!saved)show();
 })();
 document.getElementById("next").onclick=function(){track.scrollBy({left:-step(),behavior:"smooth"})};
 document.getElementById("prev").onclick=function(){track.scrollBy({left:step(),behavior:"smooth"})};
